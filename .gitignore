@@ -4,5 +4,4 @@ __pycache__/
 venv/
 .env
 uploads/
-*.docx
 !samples/*.docx
