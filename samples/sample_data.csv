@@ -1,0 +1,4 @@
+customer_name,order_id,order_date,amount
+Alice Johnson,1001,2026-06-01,99.50
+Bob Smith,1002,2026-06-02,150.00
+Carol Lee,1003,2026-06-03,42.75

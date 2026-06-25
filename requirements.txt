@@ -1,0 +1,3 @@
+# No runtime dependencies — the app uses Python 3 standard library only.
+# Optional (for development tooling only):
+# ruff

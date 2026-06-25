@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Template Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <div class="brand">
+          <span class="brand-mark">W</span>
+          <div>
+            <h1>Word Template Generator</h1>
+            <p>Fill templates and download one document or a batch ZIP.</p>
+          </div>
+        </div>
+        <ol class="steps" aria-label="Progress">
+          <li class="step active" data-step="1"><span>1</span> Template</li>
+          <li class="step" data-step="2"><span>2</span> Data</li>
+          <li class="step" data-step="3"><span>3</span> Generate</li>
+        </ol>
+      </header>
+
+      <main class="card">
+        <div id="status" class="status hidden"></div>
+        <section id="panel-1" class="panel active">
+          <h2>Upload your Word template</h2>
+          <p class="hint">
+            Use Jinja2 placeholders in your .docx file, for example
+            <code>{{ customer_name }}</code> or <code>{{ order_date }}</code>.
+          </p>
+
+          <label class="dropzone" id="template-dropzone">
+            <input type="file" id="template-input" accept=".docx" hidden />
+            <div class="dropzone-inner">
+              <div class="dropzone-icon">📄</div>
+              <p><strong>Drop a .docx file here</strong> or click to browse</p>
+              <p class="muted" id="template-label">No file selected</p>
+            </div>
+          </label>
+
+          <div id="fields-preview" class="fields-preview hidden">
+            <h3>Detected fields</h3>
+            <div id="fields-list" class="chip-list"></div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn primary" id="btn-to-2" disabled>
+              Continue to data
+            </button>
+          </div>
+        </section>
+
+        <section id="panel-2" class="panel">
+          <h2>Add your data</h2>
+
+          <div class="mode-toggle" role="tablist">
+            <button type="button" class="mode-btn active" data-mode="single">
+              Single document
+            </button>
+            <button type="button" class="mode-btn" data-mode="batch">
+              Batch (CSV)
+            </button>
+          </div>
+
+          <div id="single-mode" class="mode-panel active">
+            <p class="hint">Enter a value for each template field.</p>
+            <form id="single-form" class="field-grid"></form>
+          </div>
+
+          <div id="batch-mode" class="mode-panel">
+            <p class="hint">
+              Upload a CSV with a header row. Map each template field to a column.
+            </p>
+
+            <label class="dropzone compact" id="csv-dropzone">
+              <input type="file" id="csv-input" accept=".csv,text/csv" hidden />
+              <div class="dropzone-inner">
+                <p><strong>Drop CSV here</strong> or click to browse</p>
+                <p class="muted" id="csv-label">No CSV selected</p>
+              </div>
+            </label>
+
+            <div id="mapping-table-wrap" class="hidden">
+              <table class="mapping-table">
+                <thead>
+                  <tr>
+                    <th>Template field</th>
+                    <th>CSV column</th>
+                  </tr>
+                </thead>
+                <tbody id="mapping-body"></tbody>
+              </table>
+
+              <label class="inline-field">
+                <span>Filename column (optional)</span>
+                <select id="filename-field"></select>
+              </label>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn ghost" id="btn-back-1">Back</button>
+            <button type="button" class="btn primary" id="btn-to-3">Review & generate</button>
+          </div>
+        </section>
+
+        <section id="panel-3" class="panel">
+          <h2>Generate documents</h2>
+
+          <div class="summary" id="summary"></div>
+
+          <div class="actions">
+            <button type="button" class="btn ghost" id="btn-back-2">Back</button>
+            <button type="button" class="btn primary" id="btn-generate">
+              Generate & download
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
